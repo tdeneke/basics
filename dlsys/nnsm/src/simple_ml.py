@@ -104,7 +104,17 @@ def softmax_regression_epoch(X, y, theta, lr = 0.1, batch=100):
         None
     """
     ### BEGIN YOUR CODE
-    pass
+    iterations = (y.size + batch - 1) // batch
+    for i in range(iterations):
+        x = X[i * batch : (i+1) * batch, :]
+        yy = y[i * batch : (i+1) * batch]
+        Z = np.exp(x @ theta)
+        Z = Z / np.sum(Z, axis=1, keepdims=True)
+        Y = np.zeros((batch, y.max() + 1))
+        Y[np.arange(batch), yy] = 1
+        grad = x.T @ (Z - Y) / batch
+        assert(grad.shape == theta.shape)
+        theta -= lr * grad
     ### END YOUR CODE
 
 
