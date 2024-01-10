@@ -1,0 +1,16 @@
+certifi==2024.2.2
+charset-normalizer==3.3.2
+exceptiongroup==1.2.0
+idna==3.6
+iniconfig==2.0.0
+mugrade==1.2
+numdifftools==0.9.41
+numpy==1.26.4
+packaging==23.2
+pluggy==1.4.0
+pybind11==2.11.1
+pytest==8.0.0
+requests==2.31.0
+scipy==1.12.0
+tomli==2.0.1
+urllib3==2.2.0
