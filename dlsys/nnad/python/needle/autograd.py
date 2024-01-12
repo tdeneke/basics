@@ -380,7 +380,19 @@ def compute_gradient_of_variables(output_tensor, out_grad):
     reverse_topo_order = list(reversed(find_topo_sort([output_tensor])))
 
     ### BEGIN YOUR SOLUTION
-    raise NotImplementedError()
+    for node in reverse_topo_order:
+        # sum up partial ajoints
+        ajoint = sum_node_list(node_to_output_grads_list[node])
+        node.grad = ajoint
+        if node.op is None:
+            # Leaf node
+            continue
+        # compute partial ajoints for input node
+        partial_ajoints = node.op.gradient_as_tuple(ajoint, node)
+        for in_node, partial_ajoint in zip(node.inputs, partial_ajoints):
+            if in_node not in node_to_output_grads_list:
+                node_to_output_grads_list[in_node] = []
+            node_to_output_grads_list[in_node].append(partial_ajoint)
     ### END YOUR SOLUTION
 
 
