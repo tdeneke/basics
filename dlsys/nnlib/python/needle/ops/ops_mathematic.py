@@ -121,6 +121,7 @@ class EWiseDiv(TensorOp):
 
     def gradient(self, out_grad, node):
         ### BEGIN YOUR SOLUTION
+        lhs, rhs = node.inputs
         return out_grad / rhs, - lhs * out_grad / rhs ** 2
         ### END YOUR SOLUTION
 
