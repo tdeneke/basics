@@ -1,6 +1,7 @@
 """Optimization module"""
 import needle as ndl
 import numpy as np
+from collections import defaultdict
 
 
 class Optimizer:
@@ -20,7 +21,7 @@ class SGD(Optimizer):
         super().__init__(params)
         self.lr = lr
         self.momentum = momentum
-        self.u = {key: key for key in self.params}
+        self.u = defaultdict(float)
         self.weight_decay = weight_decay
 
     def step(self):
@@ -62,8 +63,8 @@ class Adam(Optimizer):
         self.weight_decay = weight_decay
         self.t = 0
 
-        self.m = {}
-        self.v = {}
+        self.m = defaultdict(float) 
+        self.v = defaultdict(float)
 
     def step(self):
         ### BEGIN YOUR SOLUTION
